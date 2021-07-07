@@ -16,11 +16,16 @@ class AddTaskForm extends StatefulWidget {
 
 class _AddTaskFormState extends State<AddTaskForm> {
   final _titleController = TextEditingController();
-  List<DropdownMenuItem<Category>> _dropdownMenuItems;
+  GlobalKey<FormState> _form = GlobalKey();
   Category _selectedCategory;
   List<Category> _categories;
 
   _submitForm(String categoryId) {
+    if (!_form.currentState.validate()) {
+      return;
+    }
+    _form.currentState.save();
+
     final title = _titleController.text;
     widget.addTaskFunction(title, categoryId);
     Navigator.of(context).pop();
@@ -48,15 +53,23 @@ class _AddTaskFormState extends State<AddTaskForm> {
           child: Column(children: [
             Container(
               padding: EdgeInsets.symmetric(
-                vertical: 20,
+                vertical: 10,
               ),
               child: Image.asset('assets/img/img3.png'),
             ),
-            TextField(
-              autocorrect: true,
-              controller: _titleController,
-              onSubmitted: (_) {},
-              decoration: const InputDecoration(labelText: 'Task'),
+            Form(
+              key: _form,
+              child: TextFormField(
+                autocorrect: true,
+                controller: _titleController,
+                decoration: InputDecoration(labelText: 'Task'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Escreva um título válido';
+                  }
+                  return null;
+                },
+              ),
             ),
             SizedBox(height: 20),
             Row(
@@ -80,8 +93,14 @@ class _AddTaskFormState extends State<AddTaskForm> {
                       vertical: 15,
                     ),
                     child: ElevatedButton(
-                      onPressed: () =>
-                          _submitForm(_selectedCategory.categoryId),
+                      onPressed: () {
+                        //if the user does not select a category for the new task, the new task will be added
+                        //the first category in the category list, in this case being the "geral" category.
+                        if (_selectedCategory == null) {
+                          _selectedCategory = _categories[0];
+                        }
+                        _submitForm(_selectedCategory.categoryId);
+                      },
                       child: Text(
                         'Nova Task',
                         style: TextStyle(

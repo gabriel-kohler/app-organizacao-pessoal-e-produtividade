@@ -110,6 +110,7 @@ class TaskProvider with ChangeNotifier {
       idCategory: categoryId,
       titleTask: title,
     );
+
     _itens.add(newTask);
     notifyListeners();
   }

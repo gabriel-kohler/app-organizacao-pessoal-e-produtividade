@@ -23,7 +23,7 @@ class HomePageScreen extends StatelessWidget {
               clipper: MyClipper(),
               child: Container(
                 padding: EdgeInsets.only(left: 40, top: 50, right: 20),
-                height: 350,
+                height: _size.height * 0.5,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -85,7 +85,7 @@ class HomePageScreen extends StatelessWidget {
               ],
             ),
             Container(
-              height: _size.height * 0.4,
+              height: _size.height * 0.45,
               child: _taskList.isEmpty
                   ? Center(
                       child: Text(
