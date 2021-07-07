@@ -9,12 +9,12 @@ import 'package:provider/provider.dart';
 class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Task> _taskList;
     final _size = MediaQuery.of(context).size;
     final _taskProvider = Provider.of<TaskProvider>(context);
     final _taskCategories = _taskProvider.categories;
     final _categorySelected = _taskProvider.categorySelected;
-    _taskList = _taskProvider.getTasksByCategory(_categorySelected.categoryId);
+    List<Task> _taskList =
+        _taskProvider.getTasksByCategory(_categorySelected.categoryId);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -45,7 +45,8 @@ class HomePageScreen extends StatelessWidget {
                           width: 18,
                           height: 18,
                         ),
-                        onTap: () => _taskProvider.openAddTaskFormModal(context),
+                        onTap: () =>
+                            _taskProvider.openAddTaskFormModal(context),
                       ),
                     ),
                     SizedBox(height: 20),

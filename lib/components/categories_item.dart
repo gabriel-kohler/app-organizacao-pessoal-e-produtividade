@@ -19,11 +19,19 @@ class CategoriesItem extends StatelessWidget {
         width: size.width * 0.4,
         height: size.height * 0.04,
         decoration: BoxDecoration(
-          color: Colors.black54,
+          gradient: LinearGradient(colors: [
+            Color(0xFF4b134f),
+            Color(0xFFC94B4B),
+          ]),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Center(
-          child: Text(category.title),
+          child: Text(
+            category.title,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
     );

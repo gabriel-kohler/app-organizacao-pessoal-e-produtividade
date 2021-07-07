@@ -40,16 +40,31 @@ class TaskProvider with ChangeNotifier {
     ),
     Task(
       idTask: '07',
+      idCategory: 'c2',
+      titleTask: 'Funcionalidade de adicionar nova categoria.',
+    ),
+    Task(
+      idTask: '08',
+      idCategory: 'c2',
+      titleTask: 'Adicionar task em categoria.',
+    ),
+    Task(
+      idTask: '09',
+      idCategory: 'c2',
+      titleTask: 'Resolver bug de deletar task.',
+    ),
+    Task(
+      idTask: '10',
       idCategory: 'c3',
       titleTask: 'Estudar sobre versionamento GIT.',
     ),
     Task(
-      idTask: '08',
+      idTask: '11',
       idCategory: 'c3',
       titleTask: 'Estudar sobre programação orientada a objetos.',
     ),
     Task(
-      idTask: '09',
+      idTask: '12',
       idCategory: 'c3',
       titleTask: 'Estudar sobre gerenciamento de estado com MOBX.',
     ),
