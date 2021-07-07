@@ -72,18 +72,15 @@ class TaskProvider with ChangeNotifier {
   }
 
   Category get categorySelected {
-    print(_categorySelected);
     if (_categorySelected == null) {
       _categorySelected = _categories[0];
     }
-    print(_categorySelected.title);
     return _categorySelected;
   }
 
   getTasksByCategory(String categoryId) {
     List<Task> tasksByCategory =
         _itens.where((task) => task.idCategory == categoryId).toList();
-
     return tasksByCategory;
   }
 

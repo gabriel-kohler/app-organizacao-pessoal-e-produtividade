@@ -2,33 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:prac/components/categories_item.dart';
 import 'package:prac/components/clipper.dart';
 import 'package:prac/components/task_item.dart';
-import 'package:prac/models/category.dart';
 import 'package:prac/models/task.dart';
 import 'package:prac/providers/task_provider.dart';
 import 'package:provider/provider.dart';
 
-class HomePageScreen extends StatefulWidget {
-  @override
-  _HomePageScreenState createState() => _HomePageScreenState();
-}
-
-class _HomePageScreenState extends State<HomePageScreen> {
-  List<Task> _taskList;
-
-  @override
-  void initState() {
-    super.initState();
-    final taskProvider = Provider.of<TaskProvider>(context, listen: false);
-    final categorySelected = taskProvider.categorySelected;
-    _taskList = taskProvider.getTasksByCategory(categorySelected.categoryId);
-  }
-
+class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final taskProvider = Provider.of<TaskProvider>(context);
-    final _taskCategories = taskProvider.categories;
-
+    List<Task> _taskList;
+    final _size = MediaQuery.of(context).size;
+    final _taskProvider = Provider.of<TaskProvider>(context);
+    final _taskCategories = _taskProvider.categories;
+    final _categorySelected = _taskProvider.categorySelected;
+    _taskList = _taskProvider.getTasksByCategory(_categorySelected.categoryId);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -59,7 +45,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                           width: 18,
                           height: 18,
                         ),
-                        onTap: () => taskProvider.openAddTaskFormModal(context),
+                        onTap: () => _taskProvider.openAddTaskFormModal(context),
                       ),
                     ),
                     SizedBox(height: 20),
@@ -83,8 +69,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
               children: [
                 SizedBox(width: 10),
                 Container(
-                  width: size.width * 0.95,
-                  height: size.height * 0.045,
+                  width: _size.width * 0.95,
+                  height: _size.height * 0.045,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
@@ -98,7 +84,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
               ],
             ),
             Container(
-              height: size.height * 0.4,
+              height: _size.height * 0.4,
               child: _taskList.isEmpty
                   ? Center(
                       child: Text(
