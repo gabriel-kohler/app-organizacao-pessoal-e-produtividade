@@ -6,7 +6,12 @@ import 'package:prac/models/task.dart';
 import 'package:prac/providers/task_provider.dart';
 import 'package:provider/provider.dart';
 
-class HomePageScreen extends StatelessWidget {
+class HomePageScreen extends StatefulWidget {
+  @override
+  _HomePageScreenState createState() => _HomePageScreenState();
+}
+
+class _HomePageScreenState extends State<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
@@ -99,8 +104,17 @@ class HomePageScreen extends StatelessWidget {
                   : ReorderableListView.builder(
                       shrinkWrap: true,
                       itemCount: _taskList.length,
-                      onReorder: (oldIndex, newIndex) =>
-                          _taskProvider.reorderList(newIndex, oldIndex),
+                      onReorder: (oldIndex, newIndex) {
+                        setState(() {
+                          if (newIndex > oldIndex) {
+                            newIndex -= 1;
+                          }
+                          
+                          final task = _taskList.removeAt(oldIndex);
+                          _taskList.insert(newIndex, task);
+                          print('newIndex = $newIndex, oldIndex = $oldIndex, task = ${task.titleTask}');
+                        });
+                      },
                       itemBuilder: (ctx, index) {
                         final task = _taskList[index];
                         return Column(
