@@ -56,6 +56,7 @@ class TaskItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: ListTile(
+          key: ValueKey(task),
           title: (task.isCompleted)
               ? Text(
                   task.titleTask,

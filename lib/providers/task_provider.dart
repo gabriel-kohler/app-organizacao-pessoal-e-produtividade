@@ -142,4 +142,15 @@ class TaskProvider with ChangeNotifier {
           return AddTaskForm(addTaskFunction: addTask);
         });
   }
+
+  reorderList(int newIndex, int oldIndex) {
+    if (newIndex > oldIndex) {
+      newIndex -= 1;
+    }
+    final index = newIndex;
+    final task = _itens.removeAt(oldIndex);
+    _itens.insert(index, task);
+
+    notifyListeners();
+  }
 }

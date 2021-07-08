@@ -84,6 +84,7 @@ class HomePageScreen extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: _size.height * 0.02),
             Container(
               height: _size.height * 0.45,
               child: _taskList.isEmpty
@@ -95,12 +96,16 @@ class HomePageScreen extends StatelessWidget {
                         ),
                       ),
                     )
-                  : ListView.builder(
+                  : ReorderableListView.builder(
                       shrinkWrap: true,
                       itemCount: _taskList.length,
+                      onReorder: (oldIndex, newIndex) {
+                        _taskList = _taskProvider.reorderList(newIndex, oldIndex);
+                      },
                       itemBuilder: (ctx, index) {
                         final task = _taskList[index];
                         return Column(
+                          key: ValueKey(task),
                           children: [
                             TaskItem(task),
                             Padding(
