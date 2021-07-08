@@ -99,9 +99,8 @@ class HomePageScreen extends StatelessWidget {
                   : ReorderableListView.builder(
                       shrinkWrap: true,
                       itemCount: _taskList.length,
-                      onReorder: (oldIndex, newIndex) {
-                        _taskList = _taskProvider.reorderList(newIndex, oldIndex);
-                      },
+                      onReorder: (oldIndex, newIndex) =>
+                          _taskProvider.reorderList(newIndex, oldIndex),
                       itemBuilder: (ctx, index) {
                         final task = _taskList[index];
                         return Column(
