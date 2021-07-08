@@ -32,6 +32,15 @@ class _AddTaskFormState extends State<AddTaskForm> {
 
     widget.addTaskFunction(title, categoryId);
     Navigator.of(context).pop();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text(
+          'Nova task adicionada.',
+          textAlign: TextAlign.center,
+        ),
+        duration: const Duration(seconds: 1, milliseconds: 500),
+      ),
+    );
   }
 
   _submitCategoryForm() {
@@ -43,6 +52,16 @@ class _AddTaskFormState extends State<AddTaskForm> {
     final title = _titleCategoryController.text;
 
     Provider.of<TaskProvider>(context, listen: false).addCategory(title);
+    Navigator.of(context).pop();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text(
+          'Nova categoria adicionada.',
+          textAlign: TextAlign.center,
+        ),
+        duration: const Duration(seconds: 1, milliseconds: 500),
+      ),
+    );
   }
 
   @override
@@ -86,7 +105,7 @@ class _AddTaskFormState extends State<AddTaskForm> {
                     : _titleTaskController,
                 decoration: InputDecoration(
                     labelText:
-                        (_addNewCategorySelected) ? 'Nova Categoria' : 'Task'),
+                        (_addNewCategorySelected) ? 'Categoria' : 'Task'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Escreva um título válido';
