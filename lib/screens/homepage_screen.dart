@@ -22,16 +22,16 @@ class HomePageScreen extends StatelessWidget {
             ClipPath(
               clipper: MyClipper(),
               child: Container(
-                padding: EdgeInsets.only(left: 40, top: 50, right: 20),
+                padding: const EdgeInsets.only(left: 40, top: 50, right: 20),
                 height: _size.height * 0.5,
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     colors: [
-                      Color(0xFFC94B4B),
-                      Color(0xFF4b134f),
+                      const Color(0xFFC94B4B),
+                      const Color(0xFF4b134f),
                     ],
                   ),
                 ),
@@ -49,7 +49,7 @@ class HomePageScreen extends StatelessWidget {
                             _taskProvider.openAddTaskFormModal(context),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Expanded(
                       child: Stack(
                         children: [
@@ -68,7 +68,7 @@ class HomePageScreen extends StatelessWidget {
             ),
             Row(
               children: [
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Container(
                   width: _size.width * 0.95,
                   height: _size.height * 0.045,
