@@ -115,6 +115,16 @@ class TaskProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  addCategory(String title) {
+    final newCategory = Category(
+      categoryId: Random().nextDouble().toString(),
+      title: title,
+    );
+
+    _categories.add(newCategory);
+    notifyListeners();
+  }
+
   removeTask(String id) {
     _itens.removeWhere((task) => task.idTask == id);
     notifyListeners();

@@ -15,20 +15,34 @@ class AddTaskForm extends StatefulWidget {
 }
 
 class _AddTaskFormState extends State<AddTaskForm> {
-  final _titleController = TextEditingController();
+  final _titleTaskController = TextEditingController();
+  final _titleCategoryController = TextEditingController();
   GlobalKey<FormState> _form = GlobalKey();
   Category _selectedCategory;
   List<Category> _categories;
+  bool _addNewCategorySelected = false;
 
-  _submitForm(String categoryId) {
+  _submitTaskForm(String categoryId) {
     if (!_form.currentState.validate()) {
       return;
     }
     _form.currentState.save();
 
-    final title = _titleController.text;
+    final title = _titleTaskController.text;
+
     widget.addTaskFunction(title, categoryId);
     Navigator.of(context).pop();
+  }
+
+  _submitCategoryForm() {
+    if (!_form.currentState.validate()) {
+      return;
+    }
+    _form.currentState.save();
+
+    final title = _titleCategoryController.text;
+
+    Provider.of<TaskProvider>(context, listen: false).addCategory(title);
   }
 
   @override
@@ -41,6 +55,12 @@ class _AddTaskFormState extends State<AddTaskForm> {
   _onChangeDropdownItem(Category selectedCategory) {
     setState(() {
       _selectedCategory = selectedCategory;
+    });
+  }
+
+  _addNewCategory() {
+    setState(() {
+      _addNewCategorySelected = !_addNewCategorySelected;
     });
   }
 
@@ -61,8 +81,12 @@ class _AddTaskFormState extends State<AddTaskForm> {
               key: _form,
               child: TextFormField(
                 autocorrect: true,
-                controller: _titleController,
-                decoration: InputDecoration(labelText: 'Task'),
+                controller: (_addNewCategorySelected)
+                    ? _titleCategoryController
+                    : _titleTaskController,
+                decoration: InputDecoration(
+                    labelText:
+                        (_addNewCategorySelected) ? 'Nova Categoria' : 'Task'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Escreva um título válido';
@@ -75,14 +99,29 @@ class _AddTaskFormState extends State<AddTaskForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                (_addNewCategorySelected)
+                    ? IconButton(
+                        onPressed: () => _addNewCategory(),
+                        icon: Icon(Icons.arrow_back),
+                      )
+                    : InkWell(
+                        child: Image.asset(
+                          'assets/img/img11.png',
+                          width: 18,
+                          height: 18,
+                        ),
+                        onTap: () => _addNewCategory(),
+                      ),
                 DropdownButton(
                   hint: Text('Categoria'),
-                  items: _categories.map((category) {
-                    return DropdownMenuItem(
-                      value: category,
-                      child: Text(category.title),
-                    );
-                  }).toList(),
+                  items: (_addNewCategorySelected)
+                      ? null
+                      : _categories.map((category) {
+                          return DropdownMenuItem(
+                            value: category,
+                            child: Text(category.title),
+                          );
+                        }).toList(),
                   value: _selectedCategory,
                   onChanged: _onChangeDropdownItem,
                 ),
@@ -99,10 +138,14 @@ class _AddTaskFormState extends State<AddTaskForm> {
                         if (_selectedCategory == null) {
                           _selectedCategory = _categories[0];
                         }
-                        _submitForm(_selectedCategory.categoryId);
+                        (_addNewCategorySelected)
+                            ? _submitCategoryForm()
+                            : _submitTaskForm(_selectedCategory.categoryId);
                       },
                       child: Text(
-                        'Nova Task',
+                        (_addNewCategorySelected)
+                            ? 'Nova Categoria'
+                            : 'Nova Task',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
