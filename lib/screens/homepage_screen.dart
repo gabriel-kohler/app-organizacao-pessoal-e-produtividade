@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:prac/components/categories_item.dart';
 import 'package:prac/components/clipper.dart';
 import 'package:prac/components/task_item.dart';
-import 'package:prac/models/task.dart';
 import 'package:prac/providers/task_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -18,8 +17,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
     final _taskProvider = Provider.of<TaskProvider>(context);
     final _taskCategories = _taskProvider.categories;
     final _categorySelected = _taskProvider.categorySelected;
-    List<Task> _taskList =
-        _taskProvider.getTasksByCategory(_categorySelected.categoryId);
+    final _taskList = _taskProvider.tasksByCategory;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -103,18 +102,19 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     )
                   : ReorderableListView.builder(
                       shrinkWrap: true,
-                      itemCount: _taskList.length,
                       onReorder: (oldIndex, newIndex) {
-                        setState(() {
-                          if (newIndex > oldIndex) {
-                            newIndex -= 1;
-                          }
-                          
-                          final task = _taskList.removeAt(oldIndex);
-                          _taskList.insert(newIndex, task);
-                          print('newIndex = $newIndex, oldIndex = $oldIndex, task = ${task.titleTask}');
-                        });
+                        // setState(() {
+                        //   if (newIndex > oldIndex) {
+                        //     newIndex -= 1;
+                        //   }
+
+                        //   final task = _taskList.removeAt(oldIndex);
+                        //   _taskList.insert(newIndex, task);
+                        //   //ele reordena a lista mas toda vez q da o rebuild ele volta para a lista original
+                        // });
+                        _taskProvider.reorderList(newIndex, oldIndex, _taskList);
                       },
+                      itemCount: _taskList.length,
                       itemBuilder: (ctx, index) {
                         final task = _taskList[index];
                         return Column(
