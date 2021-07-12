@@ -113,6 +113,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         // });
 
                         _taskProvider.reorderList(newIndex, oldIndex);
+                        print(_taskList.length);
                       },
                       itemCount: _taskList.length,
                       itemBuilder: (ctx, index) {

@@ -77,6 +77,7 @@ class TaskProvider with ChangeNotifier {
   ];
 
   Category _categorySelected;
+  List<Task> _tasksByCategory;
 
   List<Task> get itens {
     return [..._itens];
@@ -94,9 +95,8 @@ class TaskProvider with ChangeNotifier {
   }
 
   List<Task> get tasksByCategory {
-    return _itens
-        .where((task) => task.idCategory == _categorySelected.categoryId)
-        .toList();
+    _tasksByCategory = _itens.where((task) => task.idCategory == _categorySelected.categoryId).toList();
+    return _tasksByCategory;
   }
 
   switchCategory(Category newCategory) {
@@ -144,14 +144,22 @@ class TaskProvider with ChangeNotifier {
   }
 
   reorderList(int newIndex, int oldIndex) {
-    print(tasksByCategory.length);
+    
     if (newIndex > oldIndex) {
       newIndex -= 1;
     }
+  
 
-    final task = tasksByCategory.removeAt(oldIndex);
-    tasksByCategory.insert(newIndex, task);
+    print(_tasksByCategory[oldIndex].titleTask);
+    final task = _tasksByCategory.removeAt(oldIndex);
+    print(_tasksByCategory.length);
+    _tasksByCategory.insert(newIndex, task);
+    
 
-    notifyListeners();
+    //notifyListeners();
+    //quando da o rebuild ele volta para a lista original
+    //quando der o rebuild a lista principal deve receber uma nova lista com os index atualizados
+
+    
   }
 }
