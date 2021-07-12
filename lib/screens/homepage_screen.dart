@@ -103,16 +103,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   : ReorderableListView.builder(
                       shrinkWrap: true,
                       onReorder: (oldIndex, newIndex) {
-                        // setState(() {
-                        //   if (newIndex > oldIndex) {
-                        //     newIndex -= 1;
-                        //   }
+                        setState(() {
+                          if (newIndex > oldIndex) {
+                            newIndex -= 1;
+                          }
 
-                        //   final task = _taskList.removeAt(oldIndex);
-                        //   _taskList.insert(newIndex, task);
-                        //   //ele reordena a lista mas toda vez q da o rebuild ele volta para a lista original
-                        // });
-                        _taskProvider.reorderList(newIndex, oldIndex, _taskList);
+                          final task = _taskList.removeAt(oldIndex);
+                          _taskList.insert(newIndex, task);
+   
+                        });
+
+                        //_taskProvider.reorderList(newIndex, oldIndex, _taskList);
                       },
                       itemCount: _taskList.length,
                       itemBuilder: (ctx, index) {
