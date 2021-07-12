@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 class CategoriesItem extends StatelessWidget {
   final Category category;
+  
 
   CategoriesItem(this.category);
 

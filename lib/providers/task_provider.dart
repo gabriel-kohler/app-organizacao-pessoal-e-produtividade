@@ -94,9 +94,10 @@ class TaskProvider with ChangeNotifier {
   }
 
   List<Task> get tasksByCategory {
-    return _itens.where((task) => task.idCategory == _categorySelected.categoryId).toList(); 
+    return _itens
+        .where((task) => task.idCategory == _categorySelected.categoryId)
+        .toList();
   }
-
 
   switchCategory(Category newCategory) {
     _categorySelected = newCategory;
@@ -142,15 +143,15 @@ class TaskProvider with ChangeNotifier {
         });
   }
 
-  reorderList(int newIndex, int oldIndex, List<Task> list) {
+  reorderList(int newIndex, int oldIndex) {
+    print(tasksByCategory.length);
     if (newIndex > oldIndex) {
       newIndex -= 1;
     }
 
-    final task = list.removeAt(oldIndex);
-    list.insert(newIndex, task);
+    final task = tasksByCategory.removeAt(oldIndex);
+    tasksByCategory.insert(newIndex, task);
 
     notifyListeners();
-    return list;
   }
 }
