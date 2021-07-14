@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prac/components/add_task_form.dart';
@@ -85,11 +84,14 @@ class TaskProvider with ChangeNotifier {
     if (newIndex > oldIndex) {
       newIndex -= 1;
     }
+
+    final task = _itens.removeAt(oldIndex);
+    _itens.insert(newIndex, task);
+
+    // final task = _tasksByCategory.removeAt(oldIndex);
+    // _tasksByCategory.insert(newIndex, task);
     
-    final task = _tasksByCategory.removeAt(oldIndex);
-    _tasksByCategory.insert(newIndex, task);
-  
-    //notifyListeners();
+    notifyListeners();
     //quando da o rebuild ele volta para a lista original
     //quando der o rebuild a lista principal deve receber uma nova lista com os index atualizados
   }
