@@ -13,7 +13,7 @@ class HomeItem extends StatelessWidget {
     return ClipPath(
       clipper: MyClipper(),
       child: Container(
-        padding: const EdgeInsets.only(left: 40, top: 50, right: 20),
+        padding: const EdgeInsets.only(left: 15, top: 30, right: 20),
         height: _size.height * 0.5,
         width: double.infinity,
         decoration: const BoxDecoration(
