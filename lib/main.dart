@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:prac/providers/task_provider.dart';
-import 'package:prac/screens/homepage_screen.dart';
+import 'package:prac/utils/app_routes.dart';
+import 'package:prac/views/add_note_page.dart';
+import 'package:prac/views/home_page.dart';
+import 'package:prac/views/notes_page.dart';
 import 'package:provider/provider.dart';
 
 
@@ -25,7 +28,11 @@ class Tasks extends StatelessWidget {
           ),
           fontFamily: 'Poppins',
         ),
-        home: HomePageScreen(),
+        routes: {
+          AppRoutes.HOME_PAGE : (context) => HomePage(),
+          AppRoutes.NOTES_PAGE : (context) => NotesPage(),
+          AppRoutes.ADD_NOTES_PAGE : (context) => AddNotePage(),
+        },
         debugShowCheckedModeBanner: false,
       ),
     );

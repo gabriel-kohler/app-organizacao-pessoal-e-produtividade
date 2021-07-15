@@ -3,11 +3,10 @@ import 'package:prac/models/category.dart';
 import 'package:prac/providers/task_provider.dart';
 import 'package:provider/provider.dart';
 
-class CategoriesItem extends StatelessWidget {
+class CategoryItem extends StatelessWidget {
   final Category category;
-  
 
-  CategoriesItem(this.category);
+  CategoryItem(this.category);
 
   @override
   Widget build(BuildContext context) {
