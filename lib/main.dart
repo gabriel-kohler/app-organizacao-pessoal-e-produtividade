@@ -20,7 +20,7 @@ class Tasks extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          primaryColor: Color(0xFFC94B4B),
+          primarySwatch: Colors.purple,
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
               primary: Colors.redAccent,

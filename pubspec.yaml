@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^4.0.5
-  drag_and_drop_lists: ^0.3.2
+  google_fonts: ^2.1.0
   
 
 

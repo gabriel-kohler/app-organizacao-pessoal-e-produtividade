@@ -25,6 +25,7 @@ class _AddNoteScreenState extends State<AddNotePage> {
         _formData['note'] = '';
       }
     }
+    
   }
 
   @override

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:prac/components/clipper.dart';
 import 'package:prac/providers/task_provider.dart';
+import 'package:prac/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
 class HomeItem extends StatelessWidget {
@@ -28,13 +30,29 @@ class HomeItem extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.topRight,
-              child: InkWell(
-                child: Image.asset(
-                  'assets/img/img10.png',
-                  width: 18,
-                  height: 18,
-                ),
-                onTap: () => _taskProvider.openAddTaskFormModal(context),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed(AppRoutes.NOTES_PAGE),
+                    child: Text(
+                      'NOTES',
+                      style: GoogleFonts.nunito(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    child: Image.asset(
+                      'assets/img/img10.png',
+                      width: 20,
+                      height: 20,
+                    ),
+                    onTap: () => _taskProvider.openAddTaskFormModal(context),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 20),
