@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:prac/models/note.dart';
 
 class AddNotePage extends StatefulWidget {
@@ -9,6 +10,9 @@ class AddNotePage extends StatefulWidget {
 class _AddNoteScreenState extends State<AddNotePage> {
   GlobalKey<FormState> _keyForm = GlobalKey();
   final _formData = Map<String, String>();
+  final _focusNode = FocusNode();
+
+  quill.QuillController _controller = quill.QuillController.basic();
 
   @override
   void didChangeDependencies() {
@@ -25,7 +29,6 @@ class _AddNoteScreenState extends State<AddNotePage> {
         _formData['note'] = '';
       }
     }
-    
   }
 
   @override
@@ -34,7 +37,6 @@ class _AddNoteScreenState extends State<AddNotePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_formData['title']),
         actions: [
           IconButton(
             onPressed: () {},
@@ -44,37 +46,70 @@ class _AddNoteScreenState extends State<AddNotePage> {
       ),
       body: Container(
         height: size.height,
-        width: double.infinity,
-        margin: EdgeInsets.all(15),
-        child: Center(
-          child: Card(
-            child: Form(
-              key: _keyForm,
-              child: SizedBox(
-                height: size.height * 0.8,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      initialValue: '${_formData['title']}',
-                      decoration: InputDecoration(
-                        labelText: 'Título',
-                        contentPadding: EdgeInsets.all(10),
-                      ),
-                    ),
-                    Expanded(
-                      child: TextFormField(
-                        initialValue: '${_formData['note']}',
-                        maxLines: null,
-                        expands: true,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 18,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    color: Colors.grey[50],
+                  ),
+                  child: Row(
+                    children: [
+                      ClipPath(
+                        child: quill.QuillToolbar.basic(
+                          controller: _controller,
+                          showLink: true,
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
+              Center(
+                child: Card(
+                  child: Form(
+                    key: _keyForm,
+                    child: SizedBox(
+                      height: size.height * 0.778,
+                      width: size.width * 1,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            initialValue: '${_formData['title']}',
+                            decoration: InputDecoration(
+                              labelText: 'Título',
+                              contentPadding: EdgeInsets.all(10),
+                            ),
+                          ),
+                          Expanded(
+                            child: quill.QuillEditor(
+                              controller: _controller,
+                              scrollController: ScrollController(),
+                              scrollable: true,
+                              focusNode: _focusNode,
+                              autoFocus: false,
+                              readOnly: false,
+                              expands: false,
+                              padding: EdgeInsets.all(10),
+                              customStyles: quill.DefaultStyles(
+                                sizeSmall: const TextStyle(fontSize: 9),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
