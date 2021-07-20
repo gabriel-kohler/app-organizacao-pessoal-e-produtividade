@@ -1,7 +1,6 @@
 import 'dart:math';
-
 import 'package:prac/models/category.dart';
-import 'package:prac/models/note.dart';
+import 'package:prac/models/note_quill.dart';
 import 'package:prac/models/task.dart';
 
 //CATEGORIES
@@ -77,73 +76,62 @@ final DUMMY_TASKS = [
   ),
 ];
 
-//NOTES
+// NOTES
 
 final DUMMY_NOTES = [
-  Note(
-    noteId: Random().nextDouble().toString(),
+  NoteQuill(
+    id: Random().nextDouble().toString(),
     titleNote: 'Anotações Gerais',
-    noteContent:
-        ' is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    note: [{"insert":"ANOTAÇAO1 ANOTAÇAO1 ","attributes":{"bold":true}},{"insert":"ANOTAÇAO1 ANOTA","attributes":{"italic":true}},{"insert":"ÇAO1\n"},{"insert":"ANOTACAO1 ANOTAÇAO1 ","attributes":{"underline":true}},{"insert":"TESTE "},{"insert":"TESTE ","attributes":{"color":"#ef9a9a"}},{"insert":"TESTE","attributes":{"color":"#000000","background":"#ef9a9a"}},{"insert":"\n"}],
   ),
-  Note(
-    noteId: Random().nextDouble().toString(),
+  NoteQuill(
+    id: Random().nextDouble().toString(),
     titleNote: 'Objetivos',
-    noteContent:
-        ' is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    note: [{"insert":"ANOTACAO 2"},{"insert":"\n","attributes":{"header":1}},{"insert":"testando\ntestando"},{"insert":"\n","attributes":{"list":"ordered"}},{"insert":"novoteste"},{"insert":"\n","attributes":{"list":"ordered"}},{"insert":"novoteste"},{"insert":"\n","attributes":{"list":"ordered"}},{"insert":"novoteste"},{"insert":"\n","attributes":{"list":"ordered"}},{"insert":"\n"}],
   ),
-  Note(
-    noteId: Random().nextDouble().toString(),
+  NoteQuill(
+    id: Random().nextDouble().toString(),
     titleNote: 'Aprendizados',
-    noteContent:
-        ' is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    note: [{"insert":"LISTA"},{"insert":"\n","attributes":{"header":1}},{"insert":"item 1"},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"item 2"},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"item 3"},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"item 4"},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"\n"},{"insert":"LISTA TESTE","attributes":{"bold":true}},{"insert":"\n\n"}],
   ),
-  Note(
-    noteId: Random().nextDouble().toString(),
+  NoteQuill(
+    id: Random().nextDouble().toString(),
     titleNote: 'Ideias',
-    noteContent:
-        ' is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
   ),
-  Note(
-    noteId: Random().nextDouble().toString(),
+  NoteQuill(
+    id: Random().nextDouble().toString(),
     titleNote: 'Apps',
-    noteContent:
-        ' is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
   ),
-  Note(
-    noteId: Random().nextDouble().toString(),
+  NoteQuill(
+    id: Random().nextDouble().toString(),
     titleNote: 'Oq fazer',
-    noteContent:
-        ' is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
   ),
-  Note(
-    noteId: Random().nextDouble().toString(),
+  NoteQuill(
+    id: Random().nextDouble().toString(),
     titleNote: 'Programação',
-    noteContent:
-        ' is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
   ),
-  Note(
-    noteId: Random().nextDouble().toString(),
+  NoteQuill(
+    id: Random().nextDouble().toString(),
     titleNote: 'Livros para ler',
-    noteContent:
-        ' is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
   ),
-  Note(
-    noteId: Random().nextDouble().toString(),
+  NoteQuill(
+    id: Random().nextDouble().toString(),
     titleNote: 'Projeto App Tasks',
-    noteContent:
-        ' is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}], 
   ),
-  Note(
-    noteId: Random().nextDouble().toString(),
+  NoteQuill(
+    id: Random().nextDouble().toString(),
     titleNote: 'Bugs App Tasks',
-    noteContent:
-        ' is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
   ),
-  Note(
-    noteId: Random().nextDouble().toString(),
+  NoteQuill(
+    id: Random().nextDouble().toString(),
     titleNote: 'Anotação',
-    noteContent:
-        ' is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
   ),
 ];

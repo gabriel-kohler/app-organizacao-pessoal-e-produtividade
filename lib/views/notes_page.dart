@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prac/components/note_item.dart';
 import 'package:prac/data/dummy_data.dart';
+import 'package:prac/models/note_quill.dart';
 import 'package:prac/utils/app_routes.dart';
 
 
@@ -26,7 +27,7 @@ class NotesPage extends StatelessWidget {
         shrinkWrap: true,
         itemCount: notesList.length,
         itemBuilder: (ctx, index) {
-          final notes = notesList[index];
+          final NoteQuill notes = notesList[index];
           return NoteItem(note: notes);
         },
       ),

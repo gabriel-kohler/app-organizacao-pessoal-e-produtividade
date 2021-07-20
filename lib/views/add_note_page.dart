@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
-import 'package:prac/models/note.dart';
+import 'package:flutter_quill/models/documents/document.dart';
+import 'package:prac/models/note_quill.dart';
 
 class AddNotePage extends StatefulWidget {
   @override
@@ -18,28 +21,65 @@ class _AddNoteScreenState extends State<AddNotePage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final Note note = ModalRoute.of(context).settings.arguments;
+    final NoteQuill noteQuill = ModalRoute.of(context).settings.arguments;
 
     if (_formData.isEmpty) {
-      if (note != null) {
-        _formData['title'] = note.titleNote;
-        _formData['note'] = note.noteContent;
+      if (noteQuill != null) {
+        _formData['title'] = noteQuill.titleNote;
       } else {
         _formData['title'] = '';
-        _formData['note'] = '';
       }
+    }
+    _loadFromAssets(noteQuill);
+  }
+
+  Future<void> _loadFromAssets(NoteQuill noteQuill) async {
+    try {
+      final note = await rootBundle.loadString('assets/img/sample_data.json');
+      //da pra usar essa forma para criar modelos(templates) de notas como no evernote
+
+      final doc = (noteQuill != null)
+          ? Document.fromJson(noteQuill.note)
+          : Document.fromJson(jsonDecode(note));
+
+      setState(() {
+        _controller = quill.QuillController(
+          document: doc,
+          selection: const TextSelection.collapsed(offset: 0),
+        );
+      });
+    } catch (error) {
+      final doc = Document()..insert(0, 'Empty asset');
+      setState(() {
+        _controller = quill.QuillController(
+          document: doc,
+          selection: const TextSelection.collapsed(offset: 0),
+        );
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final NoteQuill noteQuill = ModalRoute.of(context).settings.arguments;
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                print(noteQuill.note);
+                noteQuill.note = _controller.document.toDelta().toJson();
+                print(noteQuill.note);
+                // final newNote = NoteQuill(
+                //   id: Random().nextDouble().toString(),
+                //   titleNote: _formData['title'],
+                //   note: json,
+                // );
+                //print(json);
+              });
+            },
             icon: Icon(Icons.save),
           ),
         ],
