@@ -13,9 +13,17 @@ class AddNotePage extends StatefulWidget {
 class _AddNoteScreenState extends State<AddNotePage> {
   GlobalKey<FormState> _keyForm = GlobalKey();
   final _formData = Map<String, String>();
-  final _focusNode = FocusNode();
+  final _titleFocusNode = FocusNode();
+  final _noteFocusNode = FocusNode();
 
   quill.QuillController _controller = quill.QuillController.basic();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _titleFocusNode.dispose();
+    _noteFocusNode.dispose();
+  }
 
   @override
   void didChangeDependencies() {
@@ -69,9 +77,8 @@ class _AddNoteScreenState extends State<AddNotePage> {
           IconButton(
             onPressed: () {
               setState(() {
-                print(noteQuill.note);
                 noteQuill.note = _controller.document.toDelta().toJson();
-                print(noteQuill.note);
+
                 // final newNote = NoteQuill(
                 //   id: Random().nextDouble().toString(),
                 //   titleNote: _formData['title'],
@@ -106,6 +113,7 @@ class _AddNoteScreenState extends State<AddNotePage> {
                         child: quill.QuillToolbar.basic(
                           controller: _controller,
                           showLink: true,
+                          toolbarIconSize: 16,
                         ),
                       ),
                     ],
@@ -127,13 +135,34 @@ class _AddNoteScreenState extends State<AddNotePage> {
                               labelText: 'Título',
                               contentPadding: EdgeInsets.all(10),
                             ),
+                            focusNode: _titleFocusNode,
                           ),
-                          Expanded(
+                          RawKeyboardListener(
+                            focusNode: FocusNode(),
+                            onKey: (event) {
+                              noteQuill.note = _controller.document.toDelta().toJson();
+                              if (event.data.isControlPressed &&
+                                  event.character == 'b') {
+                                if (_controller
+                                    .getSelectionStyle()
+                                    .attributes
+                                    .keys
+                                    .contains('bold')) {
+                                  _controller.formatSelection(
+                                      quill.Attribute.clone(
+                                          quill.Attribute.bold, null));
+                                } else {
+                                  _controller
+                                      .formatSelection(quill.Attribute.bold);
+                                }
+                              }
+                            },
+                            //muda o focus sempre que abre o keyboard
                             child: quill.QuillEditor(
                               controller: _controller,
                               scrollController: ScrollController(),
                               scrollable: true,
-                              focusNode: _focusNode,
+                              focusNode: _noteFocusNode,
                               autoFocus: false,
                               readOnly: false,
                               expands: false,
