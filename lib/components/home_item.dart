@@ -59,7 +59,7 @@ class HomeItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: _size.height * 0.04),
                 Expanded(
                   child: Stack(
                     children: [
