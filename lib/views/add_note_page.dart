@@ -28,7 +28,7 @@ class _AddNoteScreenState extends State<AddNotePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    print('teste');
+
     final NoteQuill noteQuill = ModalRoute.of(context).settings.arguments;
 
     if (_formData.isEmpty) {
@@ -38,7 +38,8 @@ class _AddNoteScreenState extends State<AddNotePage> {
         _formData['title'] = 'Nova anotação';
       }
     }
-    _loadFromAssets(noteQuill);
+    _loadFromAssets(
+        noteQuill); //erro aqui (provavelmente dando rebuild impendindo a seleção do texto)
   }
 
   Future<void> _loadFromAssets(NoteQuill noteQuill) async {
@@ -53,7 +54,8 @@ class _AddNoteScreenState extends State<AddNotePage> {
       setState(() {
         _controller = quill.QuillController(
           document: doc,
-          selection: TextSelection.collapsed(offset: 4),
+          selection:
+              TextSelection.collapsed(offset: doc.toPlainText().trim().length),
         );
       });
     } catch (error) {
@@ -141,7 +143,6 @@ class _AddNoteScreenState extends State<AddNotePage> {
                           RawKeyboardListener(
                             focusNode: FocusNode(),
                             onKey: (event) {
-                              
                               noteQuill.note =
                                   _controller.document.toDelta().toJson();
                               if (event.data.isControlPressed &&
