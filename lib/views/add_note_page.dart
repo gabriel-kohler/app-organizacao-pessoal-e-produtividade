@@ -161,15 +161,18 @@ class _AddNoteScreenState extends State<AddNotePage> {
                               }
                             },
                             //muda o focus sempre que abre o keyboard e dando rebuild
-                            child: quill.QuillEditor(
-                              controller: _controller,
-                              scrollController: ScrollController(),
-                              scrollable: true,
-                              focusNode: _noteFocusNode,
-                              autoFocus: false,
-                              readOnly: false,
-                              expands: false,
-                              padding: EdgeInsets.all(10),
+                            child: Container(
+                              height: _size.height * 0.7,
+                              child: quill.QuillEditor(
+                                controller: _controller,
+                                scrollController: ScrollController(),
+                                scrollable: true,
+                                focusNode: _noteFocusNode,
+                                autoFocus: false,
+                                readOnly: false,
+                                expands: false,
+                                padding: EdgeInsets.all(10),
+                              ),
                             ),
                           ),
                         ],
