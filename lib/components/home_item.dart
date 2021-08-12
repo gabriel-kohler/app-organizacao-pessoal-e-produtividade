@@ -10,67 +10,73 @@ class HomeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
     final _taskProvider = Provider.of<TaskProvider>(context);
-    return ClipPath(
-      clipper: MyClipper(),
-      child: Container(
-        padding: const EdgeInsets.only(left: 15, top: 30, right: 20),
-        height: _size.height * 0.5,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              const Color(0xFFC94B4B),
-              const Color(0xFF4b134f),
-            ],
-          ),
-        ),
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(AppRoutes.NOTES_PAGE),
-                    child: Text(
-                      'NOTES',
-                      style: GoogleFonts.nunito(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    child: Image.asset(
-                      'assets/img/img10.png',
-                      width: 20,
-                      height: 20,
-                    ),
-                    onTap: () => _taskProvider.openAddTaskFormModal(context),
-                  ),
+    return Column(
+      children: [
+        ClipPath(
+          clipper: MyClipper(),
+          child: Container(
+            padding: const EdgeInsets.only(left: 15, top: 30, right: 20),
+            height: _size.height * 0.5,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  const Color(0xFFC94B4B),
+                  const Color(0xFF4b134f),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: Stack(
-                children: [
-                  Image.asset(
-                    'assets/img/img8.png',
-                    width: 230,
-                    alignment: Alignment.topLeft,
-                    fit: BoxFit.fitWidth,
+            child: Column(
+              children: [
+                SizedBox(height: _size.height * 0.035),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context)
+                            .pushNamed(AppRoutes.NOTES_PAGE),
+                        child: Text(
+                          'NOTES',
+                          style: GoogleFonts.nunito(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        child: Image.asset(
+                          'assets/img/img10.png',
+                          width: 20,
+                          height: 20,
+                        ),
+                        onTap: () =>
+                            _taskProvider.openAddTaskFormModal(context),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            )
-          ],
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        'assets/img/img8.png',
+                        width: _size.width * 0.59,
+                        alignment: Alignment.topLeft,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

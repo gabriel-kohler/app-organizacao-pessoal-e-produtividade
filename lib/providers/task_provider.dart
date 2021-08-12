@@ -12,7 +12,7 @@ class TaskProvider with ChangeNotifier {
   final _categories = DUMMY_CATEGORIES;
 
   Category _categorySelected;
-  List<Task> _tasksByCategory;
+  //List<Task> _tasksByCategory;
   
 
   List<Task> get itens {
@@ -31,7 +31,7 @@ class TaskProvider with ChangeNotifier {
   }
 
   List<Task> get tasksByCategory {
-     _tasksByCategory = _itens.where((task) => task.idCategory == _categorySelected.categoryId).toList();
+     List<Task> _tasksByCategory = _itens.where((task) => task.idCategory == _categorySelected.categoryId).toList();
     return _tasksByCategory;
   }
 

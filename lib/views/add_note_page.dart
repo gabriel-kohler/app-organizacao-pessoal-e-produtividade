@@ -28,14 +28,14 @@ class _AddNoteScreenState extends State<AddNotePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
+    print('teste');
     final NoteQuill noteQuill = ModalRoute.of(context).settings.arguments;
 
     if (_formData.isEmpty) {
       if (noteQuill != null) {
         _formData['title'] = noteQuill.titleNote;
       } else {
-        _formData['title'] = '';
+        _formData['title'] = 'Nova anotação';
       }
     }
     _loadFromAssets(noteQuill);
@@ -53,7 +53,7 @@ class _AddNoteScreenState extends State<AddNotePage> {
       setState(() {
         _controller = quill.QuillController(
           document: doc,
-          selection: const TextSelection.collapsed(offset: 0),
+          selection: TextSelection.collapsed(offset: 4),
         );
       });
     } catch (error) {
@@ -70,7 +70,8 @@ class _AddNoteScreenState extends State<AddNotePage> {
   @override
   Widget build(BuildContext context) {
     final NoteQuill noteQuill = ModalRoute.of(context).settings.arguments;
-    final size = MediaQuery.of(context).size;
+    final _size = MediaQuery.of(context).size;
+    print('rebuild');
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -87,13 +88,13 @@ class _AddNoteScreenState extends State<AddNotePage> {
                 //print(json);
               });
             },
-            icon: Icon(Icons.save),
+            icon: Icon(Icons.check),
           ),
         ],
       ),
-      body: Container(
-        height: size.height,
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Container(
+          height: _size.height,
           child: Column(
             children: [
               SingleChildScrollView(
@@ -125,8 +126,8 @@ class _AddNoteScreenState extends State<AddNotePage> {
                   child: Form(
                     key: _keyForm,
                     child: SizedBox(
-                      height: size.height * 0.778,
-                      width: size.width * 1,
+                      height: _size.height * 0.778,
+                      width: _size.width * 1,
                       child: Column(
                         children: [
                           TextFormField(
@@ -140,7 +141,9 @@ class _AddNoteScreenState extends State<AddNotePage> {
                           RawKeyboardListener(
                             focusNode: FocusNode(),
                             onKey: (event) {
-                              noteQuill.note = _controller.document.toDelta().toJson();
+                              
+                              noteQuill.note =
+                                  _controller.document.toDelta().toJson();
                               if (event.data.isControlPressed &&
                                   event.character == 'b') {
                                 if (_controller
@@ -157,7 +160,7 @@ class _AddNoteScreenState extends State<AddNotePage> {
                                 }
                               }
                             },
-                            //muda o focus sempre que abre o keyboard
+                            //muda o focus sempre que abre o keyboard e dando rebuild
                             child: quill.QuillEditor(
                               controller: _controller,
                               scrollController: ScrollController(),
@@ -167,9 +170,6 @@ class _AddNoteScreenState extends State<AddNotePage> {
                               readOnly: false,
                               expands: false,
                               padding: EdgeInsets.all(10),
-                              customStyles: quill.DefaultStyles(
-                                sizeSmall: const TextStyle(fontSize: 9),
-                              ),
                             ),
                           ),
                         ],
