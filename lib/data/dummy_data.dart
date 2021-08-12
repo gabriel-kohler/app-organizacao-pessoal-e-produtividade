@@ -32,12 +32,12 @@ final DUMMY_TASKS = [
   Task(
     idTask: '04',
     idCategory: 'c2',
-    titleTask: 'Repassar código para projeto principal.',
+    titleTask: 'Aplicar conceito de responsabilidade única. Refatorar e melhorar código para desaclopamento',
   ),
   Task(
     idTask: '05',
     idCategory: 'c2',
-    titleTask: 'Revisar e melhorar código.',
+    titleTask: '',
   ),
   Task(
     idTask: '06',

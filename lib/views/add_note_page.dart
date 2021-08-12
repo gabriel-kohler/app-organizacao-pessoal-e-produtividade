@@ -18,11 +18,19 @@ class _AddNoteScreenState extends State<AddNotePage> {
 
   quill.QuillController _controller = quill.QuillController.basic();
 
+  bool _isLoadNote = false;
+
   @override
   void dispose() {
     super.dispose();
     _titleFocusNode.dispose();
     _noteFocusNode.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _isLoadNote = true;
   }
 
   @override
@@ -38,11 +46,10 @@ class _AddNoteScreenState extends State<AddNotePage> {
         _formData['title'] = 'Nova anotação';
       }
     }
-    _loadFromAssets(
-        noteQuill); //erro aqui (provavelmente dando rebuild impendindo a seleção do texto)
+    _loadNote(noteQuill);
   }
 
-  Future<void> _loadFromAssets(NoteQuill noteQuill) async {
+  Future<void> _loadNote(NoteQuill noteQuill) async {
     try {
       final note = await rootBundle.loadString('assets/img/sample_data.json');
       //da pra usar essa forma para criar modelos(templates) de notas como no evernote
@@ -51,13 +58,18 @@ class _AddNoteScreenState extends State<AddNotePage> {
           ? Document.fromJson(noteQuill.note)
           : Document.fromJson(jsonDecode(note));
 
-      setState(() {
-        _controller = quill.QuillController(
-          document: doc,
-          selection:
-              TextSelection.collapsed(offset: doc.toPlainText().trim().length),
-        );
-      });
+
+      //conditional is necessary for load notes correctly without bug 
+      //this conditional guarantees that the controller will only be changed in the first build
+      if (_isLoadNote) 
+        setState(() {
+          _controller = quill.QuillController(
+            document: doc,
+            selection: TextSelection.collapsed(
+                offset: doc.toPlainText().trim().length),
+          );
+          _isLoadNote = false;
+        });
     } catch (error) {
       final doc = Document()..insert(0, 'Empty asset');
       setState(() {
@@ -73,7 +85,7 @@ class _AddNoteScreenState extends State<AddNotePage> {
   Widget build(BuildContext context) {
     final NoteQuill noteQuill = ModalRoute.of(context).settings.arguments;
     final _size = MediaQuery.of(context).size;
-    print('rebuild');
+
     return Scaffold(
       appBar: AppBar(
         actions: [
