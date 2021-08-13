@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prac/providers/note_provider.dart';
 import 'package:prac/providers/task_provider.dart';
 import 'package:prac/utils/app_routes.dart';
 import 'package:prac/views/add_note_page.dart';
@@ -16,6 +17,9 @@ class Tasks extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => TaskProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NoteProvider(),
         ),
       ],
       child: MaterialApp(
