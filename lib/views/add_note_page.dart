@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
@@ -21,8 +20,9 @@ class _AddNoteScreenState extends State<AddNotePage> {
 
   quill.QuillController _controller = quill.QuillController.basic();
 
+  dynamic _note;
   bool _isLoadNote = false;
-  dynamic note;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -64,7 +64,7 @@ class _AddNoteScreenState extends State<AddNotePage> {
           : Document.fromJson(jsonDecode(templateNote));
 
       setState(() {
-        noteQuill != null ? note = noteQuill.note : note = templateNote;
+        noteQuill != null ? _note = noteQuill.note : _note = templateNote;
       });
 
       //conditional is necessary for load notes correctly without bug
@@ -90,27 +90,42 @@ class _AddNoteScreenState extends State<AddNotePage> {
     }
   }
 
+  Future<void> _submitNote(NoteQuill noteQuill) async {
+    final noteProvider = Provider.of<NoteProvider>(context, listen: false);
+    if (!_keyForm.currentState.validate()) {
+      return;
+    }
+
+    _keyForm.currentState.save();
+
+    setState(() {
+      _isLoading = true;
+      if (noteQuill != null) {
+        noteQuill.note = _controller.document.toDelta().toJson();
+        noteQuill.titleNote = _formData['title'];
+      } else {
+        _note = _controller.document.toDelta().toJson();
+        noteProvider.addNote(
+          _formData['title'],
+          _note,
+        );
+      }
+    });
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final NoteQuill noteQuill = ModalRoute.of(context).settings.arguments;
     final _size = MediaQuery.of(context).size;
-    final _noteProvider = Provider.of<NoteProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {
-              setState(() {
-                noteQuill != null
-                    ? noteQuill.note = _controller.document.toDelta().toJson()
-                    : note = _controller.document.toDelta().toJson();
-              });
-              _noteProvider.addNote(
-                _formData['title'],
-                note,
-              );
-            },
+            onPressed: () => _submitNote(noteQuill),
             icon: Icon(Icons.check),
           ),
         ],
@@ -155,11 +170,18 @@ class _AddNoteScreenState extends State<AddNotePage> {
                         children: [
                           TextFormField(
                             initialValue: '${_formData['title']}',
+                            focusNode: _titleFocusNode,
                             decoration: InputDecoration(
                               labelText: 'Título',
                               contentPadding: EdgeInsets.all(10),
                             ),
-                            focusNode: _titleFocusNode,
+                            onChanged: (value) => _formData['title'] = value,
+                            validator: (value) {
+                              if (value.isEmpty || value == null) {
+                                return 'Insira um título válido';
+                              }
+                              return null;
+                            },
                           ),
                           // RawKeyboardListener(
                           //   focusNode: FocusNode(),
@@ -184,7 +206,7 @@ class _AddNoteScreenState extends State<AddNotePage> {
                           // },
                           //child:
                           Container(
-                            height: _size.height * 0.7,
+                            height: _size.height * 0.670,
                             child: quill.QuillEditor(
                               controller: _controller,
                               scrollController: ScrollController(),
