@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:prac/components/add_task_form.dart';
+import 'package:prac/components/task_page/add_task_form.dart';
 import 'package:prac/data/dummy_data.dart';
 import 'package:prac/models/category.dart';
 import 'package:prac/models/task.dart';

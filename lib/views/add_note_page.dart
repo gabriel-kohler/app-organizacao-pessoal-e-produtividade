@@ -22,7 +22,7 @@ class _AddNoteScreenState extends State<AddNotePage> {
 
   dynamic _note;
   bool _isLoadNote = false;
-  bool _isLoading = false;
+  //bool _isLoading = false;
 
   @override
   void dispose() {
@@ -47,7 +47,7 @@ class _AddNoteScreenState extends State<AddNotePage> {
       if (noteQuill != null) {
         _formData['title'] = noteQuill.titleNote;
       } else {
-        _formData['title'] = 'Nova anotação';
+        _formData['title'] = 'Nova Anotação';
       }
     }
     _loadNote(noteQuill);
@@ -99,7 +99,6 @@ class _AddNoteScreenState extends State<AddNotePage> {
     _keyForm.currentState.save();
 
     setState(() {
-      _isLoading = true;
       if (noteQuill != null) {
         noteQuill.note = _controller.document.toDelta().toJson();
         noteQuill.titleNote = _formData['title'];
@@ -111,9 +110,6 @@ class _AddNoteScreenState extends State<AddNotePage> {
         );
       }
     });
-    setState(() {
-      _isLoading = false;
-    });
   }
 
   @override
@@ -123,10 +119,23 @@ class _AddNoteScreenState extends State<AddNotePage> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black87,
+        ),
+        backgroundColor: Colors.grey[50],
+        elevation: 0.2,
+        title: Text(
+          _formData['title'],
+          style: TextStyle(color: Colors.black87),
+        ),
+        centerTitle: true,
         actions: [
           IconButton(
+            icon: Icon(
+              Icons.check,
+              color: Colors.black87,
+            ),
             onPressed: () => _submitNote(noteQuill),
-            icon: Icon(Icons.check),
           ),
         ],
       ),
@@ -183,28 +192,6 @@ class _AddNoteScreenState extends State<AddNotePage> {
                               return null;
                             },
                           ),
-                          // RawKeyboardListener(
-                          //   focusNode: FocusNode(),
-                          //   onKey: (event) {
-                          //     noteQuill.note =
-                          //         _controller.document.toDelta().toJson();
-                          //     if (event.data.isControlPressed &&
-                          //         event.character == 'b') {
-                          //       if (_controller
-                          //           .getSelectionStyle()
-                          //           .attributes
-                          //           .keys
-                          //           .contains('bold')) {
-                          //         _controller.formatSelection(
-                          //             quill.Attribute.clone(
-                          //                 quill.Attribute.bold, null));
-                          //       } else {
-                          //         _controller
-                          //             .formatSelection(quill.Attribute.bold);
-                          //       }
-                          //     }
-                          // },
-                          //child:
                           Container(
                             height: _size.height * 0.670,
                             child: quill.QuillEditor(

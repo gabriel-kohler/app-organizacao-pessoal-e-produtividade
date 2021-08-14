@@ -1,32 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prac/components/clipper.dart';
-import 'package:prac/components/note_item.dart';
+import 'package:prac/components/note_page/note_item.dart';
 import 'package:prac/models/note_quill.dart';
 import 'package:prac/providers/note_provider.dart';
 import 'package:prac/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
 class NotesPage extends StatelessWidget {
-  
-  
-
   @override
   Widget build(BuildContext context) {
     final _noteProvider = Provider.of<NoteProvider>(context);
     final List<NoteQuill> _notesList = _noteProvider.notes;
     final _size = MediaQuery.of(context).size;
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Notes'),
-      //   actions: [
-      //     IconButton(
-      //       onPressed: () =>
-      //           Navigator.of(context).pushNamed(AppRoutes.ADD_NOTES_PAGE),
-      //       icon: Icon(Icons.add),
-      //     ),
-      //   ],
-      // ),
       body: SingleChildScrollView(
         child: Column(
           children: [

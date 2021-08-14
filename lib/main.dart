@@ -7,7 +7,6 @@ import 'package:prac/views/home_page.dart';
 import 'package:prac/views/notes_page.dart';
 import 'package:provider/provider.dart';
 
-
 void main() => runApp(Tasks());
 
 class Tasks extends StatelessWidget {
@@ -24,7 +23,11 @@ class Tasks extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          primarySwatch: Colors.purple,
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: Colors.redAccent,
+          ),
+          primaryColor: Colors.redAccent,
+          accentColor: Colors.redAccent,
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
               primary: Colors.redAccent,
@@ -33,9 +36,9 @@ class Tasks extends StatelessWidget {
           fontFamily: 'Poppins',
         ),
         routes: {
-          AppRoutes.HOME_PAGE : (context) => HomePage(),
-          AppRoutes.NOTES_PAGE : (context) => NotesPage(),
-          AppRoutes.ADD_NOTES_PAGE : (context) => AddNotePage(),
+          AppRoutes.HOME_PAGE: (context) => HomePage(),
+          AppRoutes.NOTES_PAGE: (context) => NotesPage(),
+          AppRoutes.ADD_NOTES_PAGE: (context) => AddNotePage(),
         },
         debugShowCheckedModeBanner: false,
       ),
