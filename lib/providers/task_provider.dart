@@ -7,13 +7,11 @@ import 'package:prac/models/category.dart';
 import 'package:prac/models/task.dart';
 
 class TaskProvider with ChangeNotifier {
-
   final _itens = DUMMY_TASKS;
   final _categories = DUMMY_CATEGORIES;
 
   Category _categorySelected;
   //List<Task> _tasksByCategory;
-  
 
   List<Task> get itens {
     return [..._itens];
@@ -31,7 +29,9 @@ class TaskProvider with ChangeNotifier {
   }
 
   List<Task> get tasksByCategory {
-     List<Task> _tasksByCategory = _itens.where((task) => task.idCategory == _categorySelected.categoryId).toList();
+    List<Task> _tasksByCategory = _itens
+        .where((task) => task.idCategory == _categorySelected.categoryId)
+        .toList();
     return _tasksByCategory;
   }
 
@@ -80,19 +80,17 @@ class TaskProvider with ChangeNotifier {
   }
 
   reorderList(int newIndex, int oldIndex) {
-
     if (newIndex > oldIndex) {
       newIndex -= 1;
     }
+
 
     final task = _itens.removeAt(oldIndex);
     _itens.insert(newIndex, task);
 
     // final task = _tasksByCategory.removeAt(oldIndex);
     // _tasksByCategory.insert(newIndex, task);
-    
+
     notifyListeners();
-    //quando da o rebuild ele volta para a lista original
-    //quando der o rebuild a lista principal deve receber uma nova lista com os index atualizados
-  }
+    }
 }

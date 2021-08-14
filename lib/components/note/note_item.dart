@@ -10,7 +10,7 @@ class NoteItem extends StatelessWidget {
   
   final NoteQuill note;
 
-  NoteItem({@required this.note});
+  NoteItem(this.note);
 
   @override
   Widget build(BuildContext context) {

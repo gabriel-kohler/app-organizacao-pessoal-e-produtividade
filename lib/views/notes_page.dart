@@ -90,7 +90,7 @@ class NotesPage extends StatelessWidget {
                   itemCount: _notesList.length,
                   itemBuilder: (ctx, index) {
                     final NoteQuill notes = _notesList[index];
-                    return NoteItem(note: notes);
+                    return NoteItem(notes);
                   },
                 ),
               ),
