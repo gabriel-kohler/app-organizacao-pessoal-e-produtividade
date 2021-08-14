@@ -64,11 +64,12 @@ class NotesPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(height: _size.height * 0.04),
                     Expanded(
                       child: Stack(
                         children: [
                           Image.asset(
-                            'assets/img/imgnotepage-grande.png',
+                            'assets/img/img8.png',
                             width: _size.width * 0.59,
                             alignment: Alignment.topLeft,
                             fit: BoxFit.fitWidth,
