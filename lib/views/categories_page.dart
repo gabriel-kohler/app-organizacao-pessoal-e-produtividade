@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prac/components/task_page/category_item.dart';
+import 'package:prac/components/task/category_item.dart';
 import 'package:prac/providers/task_provider.dart';
 import 'package:provider/provider.dart';
 

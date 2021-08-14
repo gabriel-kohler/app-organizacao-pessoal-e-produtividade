@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prac/components/clipper.dart';
-import 'package:prac/components/note_page/note_item.dart';
+import 'package:prac/components/note/note_item.dart';
 import 'package:prac/models/note_quill.dart';
 import 'package:prac/providers/note_provider.dart';
 import 'package:prac/utils/app_routes.dart';

@@ -22,4 +22,9 @@ class NoteProvider with ChangeNotifier {
     notes.add(newNote);
     notifyListeners();
   }
+
+  removeNote(String id) {
+    _allNotes.removeWhere((note) => note.id == id);
+    notifyListeners();
+  }
 }

@@ -25,7 +25,10 @@ class Tasks extends StatelessWidget {
         theme: ThemeData(
           textSelectionTheme: TextSelectionThemeData(
             cursorColor: Colors.redAccent,
+            selectionColor: Colors.red[100],
+            selectionHandleColor: Colors.redAccent,
           ),
+          primarySwatch: Colors.red,
           primaryColor: Colors.redAccent,
           accentColor: Colors.redAccent,
           elevatedButtonTheme: ElevatedButtonThemeData(
