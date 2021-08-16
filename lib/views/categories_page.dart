@@ -4,6 +4,7 @@ import 'package:prac/providers/task_provider.dart';
 import 'package:provider/provider.dart';
 
 class CategoriesPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final _taskProvider = Provider.of<TaskProvider>(context);

@@ -68,6 +68,20 @@ class TaskProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  removeCategory(String id) {
+    _categories.removeWhere((category) => category.categoryId == id);
+
+    _itens.removeWhere((task) => task.idCategory == id);
+
+    _categories.map((category) {
+      if (category != null) {
+        _categorySelected = category;
+      }
+    }).toList();
+
+    notifyListeners();
+  }
+
   removeTask(String id) {
     _itens.removeWhere((task) => task.idTask == id);
     notifyListeners();

@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
     final _categorySelected = _taskProvider.categorySelected;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         height: _size.height,
         width: _size.width,
