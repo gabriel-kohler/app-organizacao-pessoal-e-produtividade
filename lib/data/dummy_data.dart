@@ -32,22 +32,22 @@ final DUMMY_TASKS = [
   Task(
     idTask: '04',
     idCategory: 'c2',
-    titleTask: 'Aplicar conceito de responsabilidade única. Refatorar e melhorar código para desaclopamento',
+    titleTask: 'Corrigir responsividade',
   ),
   Task(
     idTask: '05',
     idCategory: 'c2',
-    titleTask: 'Organizar planilhas.',
+    titleTask: 'Organizar código.',
   ),
   Task(
     idTask: '06',
     idCategory: 'c2',
-    titleTask: 'Versionar projeto.',
+    titleTask: 'Melhorar tela de login.',
   ),
   Task(
     idTask: '07',
     idCategory: 'c2',
-    titleTask: 'Funcionalidade de adicionar nova categoria.',
+    titleTask: 'Corrigir bugs.',
   ),
   Task(
     idTask: '08',
@@ -62,7 +62,7 @@ final DUMMY_TASKS = [
   Task(
     idTask: '10',
     idCategory: 'c3',
-    titleTask: 'Estudar sobre versionamento GIT.',
+    titleTask: 'Armazenamento na nuvem usando AWS.',
   ),
   Task(
     idTask: '11',
@@ -72,7 +72,7 @@ final DUMMY_TASKS = [
   Task(
     idTask: '12',
     idCategory: 'c3',
-    titleTask: 'Estudar sobre gerenciamento de estado com MOBX.',
+    titleTask: 'Estudar state management com GetX.',
   ),
 ];
 
@@ -82,56 +82,253 @@ final DUMMY_NOTES = [
   NoteQuill(
     id: Random().nextDouble().toString(),
     titleNote: 'Anotações Gerais',
-    note: [{"insert":"ANOTAÇAO1 ANOTAÇAO1 ","attributes":{"bold":true}},{"insert":"ANOTAÇAO1 ANOTA","attributes":{"italic":true}},{"insert":"ÇAO1\n"},{"insert":"ANOTACAO1 ANOTAÇAO1 ","attributes":{"underline":true}},{"insert":"TESTE "},{"insert":"TESTE ","attributes":{"color":"#ef9a9a"}},{"insert":"TESTE","attributes":{"color":"#000000","background":"#ef9a9a"}},{"insert":"\n"}],
+    note: [
+      {
+        "insert": "ANOTAÇAO1 ANOTAÇAO1 ",
+        "attributes": {"bold": true}
+      },
+      {
+        "insert": "ANOTAÇAO1 ANOTA",
+        "attributes": {"italic": true}
+      },
+      {"insert": "ÇAO1\n"},
+      {
+        "insert": "ANOTACAO1 ANOTAÇAO1 ",
+        "attributes": {"underline": true}
+      },
+      {"insert": "TESTE "},
+      {
+        "insert": "TESTE ",
+        "attributes": {"color": "#ef9a9a"}
+      },
+      {
+        "insert": "TESTE",
+        "attributes": {"color": "#000000", "background": "#ef9a9a"}
+      },
+      {"insert": "\n"}
+    ],
   ),
   NoteQuill(
     id: Random().nextDouble().toString(),
     titleNote: 'Objetivos',
-    note: [{"insert":"ANOTACAO 2"},{"insert":"\n","attributes":{"header":1}},{"insert":"testando\ntestando"},{"insert":"\n","attributes":{"list":"ordered"}},{"insert":"novoteste"},{"insert":"\n","attributes":{"list":"ordered"}},{"insert":"novoteste"},{"insert":"\n","attributes":{"list":"ordered"}},{"insert":"novoteste"},{"insert":"\n","attributes":{"list":"ordered"}},{"insert":"\n"}],
+    note: [
+      {"insert": "ANOTACAO 2"},
+      {
+        "insert": "\n",
+        "attributes": {"header": 1}
+      },
+      {"insert": "testando\ntestando"},
+      {
+        "insert": "\n",
+        "attributes": {"list": "ordered"}
+      },
+      {"insert": "novoteste"},
+      {
+        "insert": "\n",
+        "attributes": {"list": "ordered"}
+      },
+      {"insert": "novoteste"},
+      {
+        "insert": "\n",
+        "attributes": {"list": "ordered"}
+      },
+      {"insert": "novoteste"},
+      {
+        "insert": "\n",
+        "attributes": {"list": "ordered"}
+      },
+      {"insert": "\n"}
+    ],
   ),
   NoteQuill(
     id: Random().nextDouble().toString(),
-    titleNote: 'Aprendizados',
-    note: [{"insert":"LISTA"},{"insert":"\n","attributes":{"header":1}},{"insert":"item 1"},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"item 2"},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"item 3"},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"item 4"},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"\n"},{"insert":"LISTA TESTE","attributes":{"bold":true}},{"insert":"\n\n"}],
+    titleNote: 'Projeto',
+    note: [
+      {"insert": "LISTA"},
+      {
+        "insert": "\n",
+        "attributes": {"header": 1}
+      },
+      {"insert": "item 1"},
+      {
+        "insert": "\n",
+        "attributes": {"list": "bullet"}
+      },
+      {"insert": "item 2"},
+      {
+        "insert": "\n",
+        "attributes": {"list": "bullet"}
+      },
+      {"insert": "item 3"},
+      {
+        "insert": "\n",
+        "attributes": {"list": "bullet"}
+      },
+      {"insert": "item 4"},
+      {
+        "insert": "\n",
+        "attributes": {"list": "bullet"}
+      },
+      {"insert": "\n"},
+      {
+        "insert": "LISTA TESTE",
+        "attributes": {"bold": true}
+      },
+      {"insert": "\n\n"}
+    ],
   ),
   NoteQuill(
     id: Random().nextDouble().toString(),
     titleNote: 'Ideias',
-    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
+    note: [
+      {"insert": "ANOTACOES"},
+      {
+        "insert": "\n",
+        "attributes": {"header": 1}
+      },
+      {"insert": "\nteste"},
+      {
+        "insert": "\n",
+        "attributes": {"code-block": true}
+      },
+      {"insert": "\nlink:\n"},
+      {
+        "insert": "www.google.com",
+        "attributes": {"link": "www.google.com"}
+      },
+      {"insert": "\n"}
+    ],
   ),
   NoteQuill(
     id: Random().nextDouble().toString(),
     titleNote: 'Apps',
-    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
+    note: [
+      {"insert": "ANOTACOES"},
+      {
+        "insert": "\n",
+        "attributes": {"header": 1}
+      },
+      {"insert": "\nteste"},
+      {
+        "insert": "\n",
+        "attributes": {"code-block": true}
+      },
+      {"insert": "\nlink:\n"},
+      {
+        "insert": "www.google.com",
+        "attributes": {"link": "www.google.com"}
+      },
+      {"insert": "\n"}
+    ],
   ),
   NoteQuill(
     id: Random().nextDouble().toString(),
     titleNote: 'Oq fazer',
-    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
+    note: [
+      {"insert": "ANOTACOES"},
+      {
+        "insert": "\n",
+        "attributes": {"header": 1}
+      },
+      {"insert": "\nteste"},
+      {
+        "insert": "\n",
+        "attributes": {"code-block": true}
+      },
+      {"insert": "\nlink:\n"},
+      {
+        "insert": "www.google.com",
+        "attributes": {"link": "www.google.com"}
+      },
+      {"insert": "\n"}
+    ],
   ),
   NoteQuill(
     id: Random().nextDouble().toString(),
     titleNote: 'Programação',
-    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
+    note: [
+      {"insert": "ANOTACOES"},
+      {
+        "insert": "\n",
+        "attributes": {"header": 1}
+      },
+      {"insert": "\nteste"},
+      {
+        "insert": "\n",
+        "attributes": {"code-block": true}
+      },
+      {"insert": "\nlink:\n"},
+      {
+        "insert": "www.google.com",
+        "attributes": {"link": "www.google.com"}
+      },
+      {"insert": "\n"}
+    ],
   ),
   NoteQuill(
     id: Random().nextDouble().toString(),
     titleNote: 'Livros para ler',
-    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
+    note: [
+      {"insert": "ANOTACOES"},
+      {
+        "insert": "\n",
+        "attributes": {"header": 1}
+      },
+      {"insert": "\nteste"},
+      {
+        "insert": "\n",
+        "attributes": {"code-block": true}
+      },
+      {"insert": "\nlink:\n"},
+      {
+        "insert": "www.google.com",
+        "attributes": {"link": "www.google.com"}
+      },
+      {"insert": "\n"}
+    ],
   ),
   NoteQuill(
     id: Random().nextDouble().toString(),
-    titleNote: 'Projeto App Tasks',
-    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}], 
-  ),
-  NoteQuill(
-    id: Random().nextDouble().toString(),
-    titleNote: 'Bugs App Tasks',
-    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
+    titleNote: 'Bugs no app',
+    note: [
+      {"insert": "ANOTACOES"},
+      {
+        "insert": "\n",
+        "attributes": {"header": 1}
+      },
+      {"insert": "\nteste"},
+      {
+        "insert": "\n",
+        "attributes": {"code-block": true}
+      },
+      {"insert": "\nlink:\n"},
+      {
+        "insert": "www.google.com",
+        "attributes": {"link": "www.google.com"}
+      },
+      {"insert": "\n"}
+    ],
   ),
   NoteQuill(
     id: Random().nextDouble().toString(),
     titleNote: 'Anotação',
-    note: [{"insert":"ANOTACOES"},{"insert":"\n","attributes":{"header":1}},{"insert":"\nteste"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"\nlink:\n"},{"insert":"www.google.com","attributes":{"link":"www.google.com"}},{"insert":"\n"}],
+    note: [
+      {"insert": "ANOTACOES"},
+      {
+        "insert": "\n",
+        "attributes": {"header": 1}
+      },
+      {"insert": "\nteste"},
+      {
+        "insert": "\n",
+        "attributes": {"code-block": true}
+      },
+      {"insert": "\nlink:\n"},
+      {
+        "insert": "www.google.com",
+        "attributes": {"link": "www.google.com"}
+      },
+      {"insert": "\n"}
+    ],
   ),
 ];
