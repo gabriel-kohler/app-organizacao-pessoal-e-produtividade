@@ -15,7 +15,7 @@
 # Remove category with onLongPress in container
 ![Screenshot_7](https://user-images.githubusercontent.com/85637999/129633320-9c0550c8-a703-46aa-af52-e4f57a45ef98.png)
 
-# ===========================================
+# ==============================
 # Notes Page
 ![Screenshot_8](https://user-images.githubusercontent.com/85637999/129633382-1978605c-dabc-4086-ba7b-46d61aa40670.png)
 
