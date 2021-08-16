@@ -10,7 +10,7 @@ class TasksPage extends StatelessWidget {
     final _taskList = _taskProvider.tasksByCategory;
     final _size = MediaQuery.of(context).size;
     return Container(
-      height: _size.height * 0.45,
+      height: _size.height * 0.46,
       child: _taskList.isEmpty
           ? Center(
               child: Text(
@@ -20,25 +20,25 @@ class TasksPage extends StatelessWidget {
                 ),
               ),
             )
-          : ReorderableListView.builder(
-              shrinkWrap: true,
-              onReorder: (oldIndex, newIndex) {
-                _taskProvider.reorderList(newIndex, oldIndex);
-              },
-              itemCount: _taskList.length,
-              itemBuilder: (ctx, index) {
-                final task = _taskList[index];
-                return Column(
-                  key: ValueKey(task),
-                  children: [
-                    TaskItem(task),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Divider(),
-                    ),
-                  ],
-                );
-              },
+          : MediaQuery.removePadding(
+              removeTop: true,
+              context: context,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: _taskList.length,
+                itemBuilder: (ctx, index) {
+                  final task = _taskList[index];
+                  return Column(
+                    children: [
+                      TaskItem(task),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: _size.width * 0.08),
+                        child: Divider(),
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
     );
   }

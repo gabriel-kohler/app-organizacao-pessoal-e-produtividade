@@ -37,7 +37,7 @@ final DUMMY_TASKS = [
   Task(
     idTask: '05',
     idCategory: 'c2',
-    titleTask: '',
+    titleTask: 'Organizar planilhas.',
   ),
   Task(
     idTask: '06',

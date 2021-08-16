@@ -7,12 +7,20 @@ import 'package:prac/providers/note_provider.dart';
 import 'package:prac/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
-class NotesPage extends StatelessWidget {
+class NotesPage extends StatefulWidget {
+  @override
+  _NotesPageState createState() => _NotesPageState();
+}
+
+class _NotesPageState extends State<NotesPage> {
   @override
   Widget build(BuildContext context) {
     final _noteProvider = Provider.of<NoteProvider>(context);
     final List<NoteQuill> _notesList = _noteProvider.notes;
     final _size = MediaQuery.of(context).size;
+
+    
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -20,8 +28,8 @@ class NotesPage extends StatelessWidget {
             ClipPath(
               clipper: MyClipper(),
               child: Container(
-                padding: const EdgeInsets.only(left: 15, top: 30, right: 20),
-                height: _size.height * 0.5,
+                padding: EdgeInsets.only(left: 15, top: _size.height * 0.05, right: 20),
+                height: _size.height * 0.6,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
@@ -71,6 +79,7 @@ class NotesPage extends StatelessWidget {
                           Image.asset(
                             'assets/img/img8.png',
                             width: _size.width * 0.59,
+                            height: _size.height * 0.59,
                             alignment: Alignment.topLeft,
                             fit: BoxFit.fitWidth,
                           )
@@ -82,16 +91,28 @@ class NotesPage extends StatelessWidget {
               ),
             ),
             Container(
-              height: _size.height * 0.5,
+              height: _size.height * 0.4,
               child: MediaQuery.removePadding(
                 removeTop: true,
                 context: context,
-                child: ListView.builder(
+                child: ReorderableListView.builder(
                   shrinkWrap: true,
                   itemCount: _notesList.length,
                   itemBuilder: (ctx, index) {
-                    final NoteQuill notes = _notesList[index];
-                    return NoteItem(notes);
+                    final NoteQuill note = _notesList[index];
+                    return Container(
+                      key: ValueKey(note),
+                      child: NoteItem(note),
+                    );
+                  },
+                  onReorder: (oldIndex, newIndex) {
+                    setState(() {
+                      if (newIndex > oldIndex) {
+                        newIndex = newIndex - 1;
+                      }
+                      final element = _notesList.removeAt(oldIndex);
+                      _notesList.insert(newIndex, element);
+                    });
                   },
                 ),
               ),

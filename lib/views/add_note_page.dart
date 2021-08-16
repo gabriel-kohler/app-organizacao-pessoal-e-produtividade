@@ -47,7 +47,7 @@ class _AddNoteScreenState extends State<AddNotePage> {
       if (noteQuill != null) {
         _formData['title'] = noteQuill.titleNote;
       } else {
-        _formData['title'] = 'Nova Anotação';
+        _formData['title'] = 'Sem Título';
       }
     }
     _loadNote(noteQuill);
@@ -142,74 +142,83 @@ class _AddNoteScreenState extends State<AddNotePage> {
       body: SingleChildScrollView(
         child: Container(
           height: _size.height,
+          width: _size.width,
           child: Column(
             children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 18,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    color: Colors.grey[50],
-                  ),
-                  child: Row(
-                    children: [
-                      ClipPath(
-                        child: quill.QuillToolbar.basic(
-                          controller: _controller,
-                          showLink: true,
-                          toolbarIconSize: 16,
+              Expanded(
+                child: LayoutBuilder(builder: (_, constraints) {
+                  return Container(
+                    //height: constraints.maxHeight * 9,
+                    child: Column(
+                      children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: constraints.maxHeight * 0.007,
+                              horizontal: constraints.maxWidth * 0.048,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: Colors.grey[50],
+                            ),
+                            child: Row(
+                              children: [
+                                ClipPath(
+                                  child: quill.QuillToolbar.basic(
+                                    controller: _controller,
+                                    showLink: true,
+                                    toolbarIconSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Center(
-                child: Card(
-                  child: Form(
-                    key: _keyForm,
-                    child: SizedBox(
-                      height: _size.height * 0.778,
-                      width: _size.width * 1,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            initialValue: '${_formData['title']}',
-                            focusNode: _titleFocusNode,
-                            decoration: InputDecoration(
-                              labelText: 'Título',
-                              contentPadding: EdgeInsets.all(10),
-                            ),
-                            onChanged: (value) => _formData['title'] = value,
-                            validator: (value) {
-                              if (value.isEmpty || value == null) {
-                                return 'Insira um título válido';
-                              }
-                              return null;
-                            },
-                          ),
-                          Container(
-                            height: _size.height * 0.670,
-                            child: quill.QuillEditor(
-                              controller: _controller,
-                              scrollController: ScrollController(),
-                              scrollable: true,
-                              focusNode: _noteFocusNode,
-                              autoFocus: false,
-                              readOnly: false,
-                              expands: false,
-                              padding: EdgeInsets.all(10),
+                        Center(
+                          child: Card(
+                            child: Form(
+                              key: _keyForm,
+                              child: Column(
+                                children: [
+                                  TextFormField(
+                                    initialValue: '${_formData['title']}',
+                                    focusNode: _titleFocusNode,
+                                    decoration: InputDecoration(
+                                      labelText: 'Título',
+                                      contentPadding: EdgeInsets.all(10),
+                                    ),
+                                    onChanged: (value) =>
+                                        _formData['title'] = value,
+                                    validator: (value) {
+                                      if (value.isEmpty || value == null) {
+                                        return 'Insira um título válido';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  Container(
+                                    height: constraints.maxHeight * 0.814,
+                                    child: quill.QuillEditor(
+                                      controller: _controller,
+                                      scrollController: ScrollController(),
+                                      scrollable: true,
+                                      focusNode: _noteFocusNode,
+                                      autoFocus: false,
+                                      readOnly: false,
+                                      expands: false,
+                                      padding: EdgeInsets.all(5),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
+                  );
+                }),
               ),
             ],
           ),

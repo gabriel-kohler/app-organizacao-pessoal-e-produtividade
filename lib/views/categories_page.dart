@@ -12,14 +12,18 @@ class CategoriesPage extends StatelessWidget {
     return Container(
       width: _size.width * 0.95,
       height: _size.height * 0.045,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        itemCount: _taskCategories.length,
-        itemBuilder: (ctx, index) {
-          final category = _taskCategories[index];
-          return CategoryItem(category);
-        },
+      child: MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+          itemCount: _taskCategories.length,
+          itemBuilder: (ctx, index) {
+            final category = _taskCategories[index];
+            return CategoryItem(category);
+          },
+        ),
       ),
     );
   }

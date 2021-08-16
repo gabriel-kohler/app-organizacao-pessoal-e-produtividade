@@ -32,6 +32,13 @@ class TaskProvider with ChangeNotifier {
     List<Task> _tasksByCategory = _itens
         .where((task) => task.idCategory == _categorySelected.categoryId)
         .toList();
+    _tasksByCategory.sort((a, b) {
+      if (a.isCompleted) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
     return _tasksByCategory;
   }
 
@@ -79,18 +86,18 @@ class TaskProvider with ChangeNotifier {
         });
   }
 
-  reorderList(int newIndex, int oldIndex) {
-    if (newIndex > oldIndex) {
-      newIndex -= 1;
-    }
+  // reorderList(int newIndex, int oldIndex) {
+  //   if (newIndex > oldIndex) {
+  //     newIndex -= 1;
+  //   }
 
+  //   final task = _itens.removeAt(oldIndex);
+  //   _itens.insert(newIndex, task);
 
-    final task = _itens.removeAt(oldIndex);
-    _itens.insert(newIndex, task);
+  //   // final task = _tasksByCategory.removeAt(oldIndex);
+  //   // _tasksByCategory.insert(newIndex, task);
 
-    // final task = _tasksByCategory.removeAt(oldIndex);
-    // _tasksByCategory.insert(newIndex, task);
+  //   notifyListeners();
+  //   }
 
-    notifyListeners();
-    }
 }

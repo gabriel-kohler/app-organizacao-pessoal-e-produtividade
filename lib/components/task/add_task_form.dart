@@ -85,101 +85,117 @@ class _AddTaskFormState extends State<AddTaskForm> {
 
   @override
   Widget build(BuildContext context) {
+    final _size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Container(
         child: Padding(
           padding: const EdgeInsets.all(15),
-          child: Column(children: [
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: 10,
-              ),
-              child: Image.asset('assets/img/img3.png'),
-            ),
-            Form(
-              key: _form,
-              child: TextFormField(
-                autocorrect: true,
-                controller: (_addNewCategorySelected)
-                    ? _titleCategoryController
-                    : _titleTaskController,
-                decoration: InputDecoration(
-                    labelText:
-                        (_addNewCategorySelected) ? 'Categoria' : 'Task'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Escreva um título válido';
-                  }
-                  return null;
-                },
-              ),
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                (_addNewCategorySelected)
-                    ? IconButton(
-                        onPressed: () => _addNewCategory(),
-                        icon: Icon(Icons.arrow_back),
-                      )
-                    : InkWell(
-                        child: Image.asset(
-                          'assets/img/img11.png',
-                          width: 18,
-                          height: 18,
-                        ),
-                        onTap: () => _addNewCategory(),
-                      ),
-                DropdownButton(
-                  hint: Text('Categoria'),
-                  items: (_addNewCategorySelected)
-                      ? null
-                      : _categories.map((category) {
-                          return DropdownMenuItem(
-                            value: category,
-                            child: Text(category.title),
-                          );
-                        }).toList(),
-                  value: _selectedCategory,
-                  onChanged: _onChangeDropdownItem,
-                ),
-                SizedBox(
-                  width: 150,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 15,
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        //if the user does not select a category for the new task, the new task will be added
-                        //the first category in the category list, in this case being the "geral" category.
-                        if (_selectedCategory == null) {
-                          _selectedCategory = _categories[0];
-                        }
-                        (_addNewCategorySelected)
-                            ? _submitCategoryForm()
-                            : _submitTaskForm(_selectedCategory.categoryId);
-                      },
-                      child: Text(
-                        (_addNewCategorySelected)
-                            ? 'Nova Categoria'
-                            : 'Nova Task',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xFFC94B4B),
-                      ),
-                    ),
+          child: Column(
+            children: [
+              if (_addNewCategorySelected)
+                Container(
+                  margin: EdgeInsets.only(right: _size.width * 0.85),
+                  height: _size.height * 0.040,
+                  width: _size.width * 0.1,
+                  child: IconButton(
+                    onPressed: () => _addNewCategory(),
+                    icon: Icon(Icons.arrow_back),
                   ),
-                )
-              ],
-            ),
-            SizedBox(height: 20),
-          ]),
+                ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: _size.height * 0.004,
+                ),
+                child: Image.asset(
+                  'assets/img/img3.png',
+                  width: _size.width * 0.28,
+                  height: _size.height * 0.28,
+                ),
+              ),
+              Form(
+                key: _form,
+                child: TextFormField(
+                  autocorrect: true,
+                  controller: (_addNewCategorySelected)
+                      ? _titleCategoryController
+                      : _titleTaskController,
+                  decoration: InputDecoration(
+                      labelText:
+                          (_addNewCategorySelected) ? 'Categoria' : 'Task'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Escreva um título válido';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              SizedBox(height: _size.height * 0.002),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  if (!_addNewCategorySelected)
+                    InkWell(
+                      child: Image.asset(
+                        'assets/img/img11.png',
+                        width: _size.width * 0.04,
+                        height: _size.height * 0.1,
+                      ),
+                      onTap: () => _addNewCategory(),
+                    ),
+                  if (!_addNewCategorySelected)
+                    DropdownButton(
+                      hint: Text('Categoria'),
+                      items: (_addNewCategorySelected)
+                          ? null
+                          : _categories.map((category) {
+                              return DropdownMenuItem(
+                                value: category,
+                                child: Text(category.title),
+                              );
+                            }).toList(),
+                      value: _selectedCategory,
+                      onChanged: _onChangeDropdownItem,
+                    ),
+                  SizedBox(
+                    height: _size.height * 0.08,
+                    width: _addNewCategorySelected
+                        ? _size.width * 0.6
+                        : _size.width * 0.4,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: _size.height * 0.02,
+                      ),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          //if the user does not select a category for the new task, the new task will be added
+                          //the first category in the category list, in this case being the "geral" category.
+                          if (_selectedCategory == null) {
+                            _selectedCategory = _categories[0];
+                          }
+                          (_addNewCategorySelected)
+                              ? _submitCategoryForm()
+                              : _submitTaskForm(_selectedCategory.categoryId);
+                        },
+                        child: Text(
+                          (_addNewCategorySelected)
+                              ? 'Nova Categoria'
+                              : 'Nova Task',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Color(0xFFC94B4B),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

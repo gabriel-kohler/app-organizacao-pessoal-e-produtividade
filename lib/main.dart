@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:prac/providers/note_provider.dart';
 import 'package:prac/providers/task_provider.dart';
 import 'package:prac/utils/app_routes.dart';
@@ -12,6 +13,7 @@ void main() => runApp(Tasks());
 class Tasks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -23,6 +25,7 @@ class Tasks extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
+          visualDensity: VisualDensity.adaptivePlatformDensity,
           textSelectionTheme: TextSelectionThemeData(
             cursorColor: Colors.redAccent,
             selectionColor: Colors.red[100],
