@@ -55,6 +55,11 @@ class CategoryItem extends StatelessWidget {
             const Color(0xFFC94B4B),
           ]),
           borderRadius: BorderRadius.circular(15),
+          border: taskProvider.categorySelected == category
+              ? Border.all(
+                  color: Colors.grey[900],
+                )
+              : null,
         ),
         child: Center(
           child: Text(
