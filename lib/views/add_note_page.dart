@@ -57,8 +57,7 @@ class _AddNoteScreenState extends State<AddNotePage> {
     try {
       final templateNote =
           await rootBundle.loadString('assets/img/sample_data.json');
-      //da pra usar essa forma para criar modelos(templates) de notas como no evernote
-
+      
       final doc = (noteQuill != null)
           ? Document.fromJson(noteQuill.note)
           : Document.fromJson(jsonDecode(templateNote));
